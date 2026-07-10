@@ -1,0 +1,33 @@
+name: Sync Storyblok Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/utils/site.ts'
+      - 'scripts/sync-storyblok.mjs'
+  workflow_dispatch: # Allows manual trigger from the GitHub Actions tab
+
+jobs:
+  sync:
+    name: Sync Pages to Storyblok
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Storyblok Sync Script
+        run: npx tsx scripts/sync-storyblok.mjs
+        env:
+          STORYBLOK_PAT: ${{ secrets.STORYBLOK_PAT }}
+          STORYBLOK_SPACE_ID: ${{ secrets.STORYBLOK_SPACE_ID }}
