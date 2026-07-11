@@ -5,6 +5,7 @@ import {
   HelpCircle, Eye, Share2, Image as ImageIcon, BookOpen, Layers, Target, ChevronRight, ArrowLeft
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { storyblokEditable } from "@storyblok/react";
 
 interface AuditMetric {
   key: string;
@@ -16,7 +17,7 @@ interface AuditMetric {
   recommendation: string;
 }
 
-export default function SEOTools() {
+export default function SEOTools({ content }: { content?: any }) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -135,7 +136,7 @@ export default function SEOTools() {
   };
 
   return (
-    <div className="bg-gray-50/50 min-h-screen text-gray-900 font-sans selection:bg-emerald-100 pb-20">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50/50 min-h-screen text-gray-900 font-sans selection:bg-emerald-100 pb-20">
       
       {/* Dynamic Header */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
@@ -162,11 +163,10 @@ export default function SEOTools() {
             <Rocket className="w-6 h-6 animate-bounce" />
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-990 tracking-tight text-gray-900 leading-tight">
-            ประเมินคะแนนคุณภาพและแก้ไขเว็บไซต์ของคุณฟรี 🛠️
+            {content?.headline || "ประเมินคะแนนคุณภาพและแก้ไขเว็บไซต์ของคุณฟรี 🛠️"}
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
-            เริ่มต้นทันทีง่ายๆ เพียงป้อนลิงก์ของคุณ! ระบบจะดึงข้อมูลวิจัย On-Page และประเด็นสำคัญระดับสากล 
-            พร้อมคำอธิบายแบบ Hover ทีละรายการเพื่อให้คุณเข้าใจง่าย แม้ไม่เคยเรียน SEO มาก่อนก็ตาม
+          <p className="text-gray-500 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+            {content?.description || "เริ่มต้นทันทีง่ายๆ เพียงป้อนลิงก์ของคุณ! ระบบจะดึงข้อมูลวิจัย On-Page และประเด็นสำคัญระดับสากล \nพร้อมคำอธิบายแบบ Hover ทีละรายการเพื่อให้คุณเข้าใจง่าย แม้ไม่เคยเรียน SEO มาก่อนก็ตาม"}
           </p>
         </div>
 

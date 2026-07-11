@@ -3,8 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { Search, Calendar, Clock, ChevronRight, ArrowRight, Loader2 } from "lucide-react";
 import { BLOG_POSTS, BlogPost } from "../data/blogPosts";
 import { fetchStoryblokPosts } from "../utils/storyblok";
+import { storyblokEditable } from "@storyblok/react";
 
-export default function Blog() {
+export default function Blog({ content }: { content?: any }) {
   const navigate = useNavigate();
   const [posts, setPosts] = useState<BlogPost[]>(BLOG_POSTS);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,17 +51,21 @@ export default function Blog() {
 
 
   return (
-    <div className="bg-slate-50/50 min-h-screen text-slate-800 font-sans pb-16">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-slate-50/50 min-h-screen text-slate-800 font-sans pb-16">
       
       {/* Blog Hub Hero Title Banner */}
       <div className="bg-white border-b border-slate-200 py-16 relative">
         <div className="absolute right-0 top-0 w-64 h-64 bg-emerald-50/50 rounded-full blur-3xl pointer-events-none"></div>
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 relative z-10">
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-none">
-            คลังความรู้และ <span className="text-emerald-650 bg-emerald-50 px-2 rounded-lg text-emerald-600 font-black">บทความ SEO</span>
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-none whitespace-pre-line">
+            {content?.headline || (
+              <>
+                คลังความรู้และ <span className="text-emerald-650 bg-emerald-50 px-2 rounded-lg text-emerald-600 font-black">บทความ SEO</span>
+              </>
+            )}
           </h1>
-          <p className="text-slate-500 max-w-lg mx-auto text-sm sm:text-base font-medium">
-            อัปเดตสถิติ เทคนิคเชิงลึก กลยุทธ์กวาดทราฟฟิกหน้าแรก Google และปักหมุดหน้าร้าน GMB ที่ดีที่สุดเพื่อคนไทย
+          <p className="text-slate-500 max-w-lg mx-auto text-sm sm:text-base font-medium whitespace-pre-line">
+            {content?.description || "อัปเดตสถิติ เทคนิคเชิงลึก กลยุทธ์กวาดทราฟฟิกหน้าแรก Google และปักหมุดหน้าร้าน GMB ที่ดีที่สุดเพื่อคนไทย"}
           </p>
 
           {/* Search Box */}

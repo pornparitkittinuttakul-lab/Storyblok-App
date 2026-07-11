@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { awardPoints } from "../utils/gamification";
+import { storyblokEditable } from "@storyblok/react";
 import type { StoryblokPageContent } from "../utils/storyblok";
 
 interface HomeProps {
@@ -175,7 +176,7 @@ export default function Home({ content }: HomeProps) {
   const heroDescription = content?.description || content?.excerpt || "คอร์สเรียน SEO ครบวงจรภาษาไทย พร้อมเครื่องมือวิเคราะห์ด้วย AI เกมฝึกทักษะ และระบบเก็บคะแนนความสำเร็จแบบจัดเต็ม ออกแบบมาเพื่อให้คุณเห็นผลลัพธ์จริงตั้งแต่สัปดาห์แรก";
 
   return (
-    <div className="bg-white min-h-screen overflow-x-hidden text-gray-900 font-sans selection:bg-emerald-150 selection:text-emerald-900">
+    <div {...(content ? storyblokEditable(content as any) : {})} className="bg-white min-h-screen overflow-x-hidden text-gray-900 font-sans selection:bg-emerald-150 selection:text-emerald-900">
       
       {/* Search/Points notification alerts decoration */}
       <AnimatePresence>
@@ -216,10 +217,10 @@ export default function Home({ content }: HomeProps) {
 
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
                 <button
-                  onClick={() => navigate("/SEOTools")}
+                  onClick={() => navigate(content?.ctaLink || "/contact")}
                   className="w-full sm:w-auto px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center space-x-2 cursor-pointer"
                 >
-                  <span>เริ่มเรียนเลย</span>
+                  <span>{content?.ctaText || "เริ่มเรียนเลย"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 

@@ -13,8 +13,9 @@ import {
   ALL_BADGES, 
   Badge 
 } from "../utils/gamification";
+import { storyblokEditable } from "@storyblok/react";
 
-export default function Games() {
+export default function Games({ content }: { content?: any }) {
   // Gamification profile states
   const [profile, setProfile] = useState(() => getUserProfile());
   const [leaderboard, setLeaderboard] = useState(() => getLeaderboard());
@@ -259,7 +260,7 @@ export default function Games() {
   };
 
   return (
-    <div className="bg-slate-50/50 min-h-screen text-slate-800 font-sans pb-24 relative overflow-hidden">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-slate-50/50 min-h-screen text-slate-800 font-sans pb-24 relative overflow-hidden">
       
       {/* Background visual graphics */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
@@ -331,11 +332,15 @@ export default function Games() {
             <Gamepad2 className="w-4 h-4 text-emerald-500 animate-spin" />
             <span>SEO 101 GAMIFIED ARCADE V2</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-none font-sans">
-            ลานประลองทักษะ <span className="text-emerald-600 bg-emerald-50 px-2 rounded-lg font-black">SEO & GEO</span> 🕹️
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-none font-sans whitespace-pre-line">
+            {content?.headline || (
+              <>
+                ลานประลองทักษะ <span className="text-emerald-600 bg-emerald-50 px-2 rounded-lg font-black">SEO & GEO</span> 🕹️
+              </>
+            )}
           </h1>
-          <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto font-medium leading-relaxed">
-            ทดสอบสมรรถภาพด้วยระบบประชันคำนวณ สะสมคะแนนความชอบ ปลดล็อคตราเหรียญเกียรติยศ และครองอันดับหัวตารางผู้นำการเรียนรู้ในระดับสากล!
+          <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto font-medium leading-relaxed whitespace-pre-line">
+            {content?.description || "ทดสอบสมรรถภาพด้วยระบบประชันคำนวณ สะสมคะแนนความชอบ ปลดล็อคตราเหรียญเกียรติยศ และครองอันดับหัวตารางผู้นำการเรียนรู้ในระดับสากล!"}
           </p>
         </div>
 

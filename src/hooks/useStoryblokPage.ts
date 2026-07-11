@@ -40,7 +40,7 @@ export function useStoryblokPage(slug: string) {
 
   // Hook into the visual editor bridge if a story exists
   // useStoryblokState returns the updated story when it receives events from the visual editor
-  const liveStory = useStoryblokState(state.story || undefined);
+  const liveStory = useStoryblokState(state.story as any) as any;
 
   return {
     ...state,
