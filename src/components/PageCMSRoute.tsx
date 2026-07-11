@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo, isValidElement, cloneElement } from "react";
 import CMSPageContent, { getCmsRenderMode } from "./CMSPageContent";
 import SEOHead from "./SEOHead";
 import { useStoryblokPage } from "../hooks/useStoryblokPage";
@@ -16,6 +16,11 @@ export default function PageCMSRoute({ definition, children, disableSeo = false 
   const renderMode = getCmsRenderMode(cms.content);
   const shouldReplace = cms.content && renderMode === "replace";
 
+  // Pass cms content down to the page component if it's a valid React element
+  const pageElement = isValidElement(children) 
+    ? cloneElement(children, { content: cms.content } as any) 
+    : children;
+
   return (
     <>
       {!disableSeo && <SEOHead seo={seo} path={definition.path} />}
@@ -29,7 +34,7 @@ export default function PageCMSRoute({ definition, children, disableSeo = false 
           CMS fallback content is active: {cms.reason}.
         </div>
       )}
-      {shouldReplace ? <CMSPageContent content={cms.content} /> : children}
+      {shouldReplace ? <CMSPageContent content={cms.content} /> : pageElement}
       {!shouldReplace && <CMSPageContent content={cms.content} />}
     </>
   );

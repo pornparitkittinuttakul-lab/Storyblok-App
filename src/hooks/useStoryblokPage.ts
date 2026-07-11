@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchStoryblokPage, StoryblokPageFetchResult } from "../utils/storyblok";
+import { useStoryblokState } from "@storyblok/react";
 
 interface StoryblokPageState extends StoryblokPageFetchResult {
   isLoading: boolean;
@@ -37,5 +38,13 @@ export function useStoryblokPage(slug: string) {
     };
   }, [slug]);
 
-  return state;
+  // Hook into the visual editor bridge if a story exists
+  // useStoryblokState returns the updated story when it receives events from the visual editor
+  const liveStory = useStoryblokState(state.story || undefined);
+
+  return {
+    ...state,
+    story: liveStory || state.story,
+    content: liveStory?.content || state.content,
+  };
 }

@@ -7,8 +7,13 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { awardPoints } from "../utils/gamification";
+import type { StoryblokPageContent } from "../utils/storyblok";
 
-export default function Home() {
+interface HomeProps {
+  content?: StoryblokPageContent | null;
+}
+
+export default function Home({ content }: HomeProps) {
   const navigate = useNavigate();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   
@@ -165,6 +170,10 @@ export default function Home() {
     }
   ];
 
+  // Dynamic CMS values for Hero section
+  const heroTitle = content?.headline || content?.title || "เรียนรู้ที่จะ\nติดอันดับ 1";
+  const heroDescription = content?.description || content?.excerpt || "คอร์สเรียน SEO ครบวงจรภาษาไทย พร้อมเครื่องมือวิเคราะห์ด้วย AI เกมฝึกทักษะ และระบบเก็บคะแนนความสำเร็จแบบจัดเต็ม ออกแบบมาเพื่อให้คุณเห็นผลลัพธ์จริงตั้งแต่สัปดาห์แรก";
+
   return (
     <div className="bg-white min-h-screen overflow-x-hidden text-gray-900 font-sans selection:bg-emerald-150 selection:text-emerald-900">
       
@@ -197,17 +206,12 @@ export default function Home() {
                 <span className="break-words">แพลตฟอร์มเรียน SEO อันดับ 1 ของไทย</span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-950 tracking-tight leading-tight">
-                เรียนรู้ที่จะ
-                <br />
-                <span className="text-emerald-500 inline-flex items-center">
-                  ติดอันดับ 1
-                  <span className="w-1.5 h-10 bg-emerald-500 ml-1.5 animate-pulse rounded-full"></span>
-                </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-950 tracking-tight leading-tight whitespace-pre-line">
+                {heroTitle}
               </h1>
               
               <p className="text-gray-500 text-lg sm:text-lg max-w-xl leading-relaxed break-words">
-                คอร์สเรียน SEO ครบวงจรภาษาไทย พร้อมเครื่องมือวิเคราะห์ด้วย AI เกมฝึกทักษะ และระบบเก็บคะแนนความสำเร็จแบบจัดเต็ม ออกแบบมาเพื่อให้คุณเห็นผลลัพธ์จริงตั้งแต่สัปดาห์แรก
+                {heroDescription}
               </p>
 
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
