@@ -58,18 +58,18 @@ export default function App() {
             <Route path="/CoreUpdates" element={withCMS(SITE_ROUTES_BY_KEY.coreUpdates, <CoreUpdates />)} />
             <Route path="/PageSpeed" element={withCMS(SITE_ROUTES_BY_KEY.pageSpeed, <PageSpeedTest />)} />
             
-            {/* Storyblok slug aliases */}
-            <Route path="/blog" element={<Navigate to="/Blog" replace />} />
-            <Route path="/blog-post" element={<Navigate to="/BlogPost" replace />} />
-            <Route path="/games" element={<Navigate to="/Games" replace />} />
-            <Route path="/seo-tools" element={<Navigate to="/SEOTools" replace />} />
-            <Route path="/gmb-tools" element={<Navigate to="/GmbTools" replace />} />
-            <Route path="/classic-seo" element={<Navigate to="/ClassicSEO" replace />} />
-            <Route path="/ai-overviews" element={<Navigate to="/AIOverviews" replace />} />
-            <Route path="/generative-engine" element={<Navigate to="/GenerativeEngine" replace />} />
-            <Route path="/core-updates" element={<Navigate to="/CoreUpdates" replace />} />
-            <Route path="/page-speed" element={<Navigate to="/PageSpeed" replace />} />
-            <Route path="/home" element={<Navigate to="/" replace />} />
+            {/* Storyblok slug aliases (Must render component directly to preserve ?_storyblok query params for the visual editor) */}
+            <Route path="/blog" element={withCMS(SITE_ROUTES_BY_KEY.blog, <Blog />)} />
+            <Route path="/blog-post" element={withCMS(SITE_ROUTES_BY_KEY.blogPost, <BlogPost />, true)} />
+            <Route path="/games" element={withCMS(SITE_ROUTES_BY_KEY.games, <Games />)} />
+            <Route path="/seo-tools" element={withCMS(SITE_ROUTES_BY_KEY.seoTools, <SEOTools />)} />
+            <Route path="/gmb-tools" element={withCMS(SITE_ROUTES_BY_KEY.gmbTools, <GmbTools />)} />
+            <Route path="/classic-seo" element={withCMS(SITE_ROUTES_BY_KEY.classicSeo, <ClassicSEO />)} />
+            <Route path="/ai-overviews" element={withCMS(SITE_ROUTES_BY_KEY.aiOverviews, <AIOverviews />)} />
+            <Route path="/generative-engine" element={withCMS(SITE_ROUTES_BY_KEY.generativeEngine, <GenerativeEngine />)} />
+            <Route path="/core-updates" element={withCMS(SITE_ROUTES_BY_KEY.coreUpdates, <CoreUpdates />)} />
+            <Route path="/page-speed" element={withCMS(SITE_ROUTES_BY_KEY.pageSpeed, <PageSpeedTest />)} />
+            <Route path="/home" element={withCMS(SITE_ROUTES_BY_KEY.home, <Home />)} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
