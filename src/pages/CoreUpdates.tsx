@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, AlertOctagon, Heart, Shield, HelpCircle, Activity } from "lucide-react";
+import { storyblokEditable } from "@storyblok/react";
 import { motion } from "motion/react";
 
-export default function CoreUpdates() {
+export default function CoreUpdates({ content }: { content?: any }) {
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50 min-h-screen text-gray-900 font-sans">
       {/* Sticky Header */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
@@ -33,14 +34,12 @@ export default function CoreUpdates() {
         >
           {/* Header titles */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight">
-              Google Core Updates: ปราสาทและทฤษฎีการผ่านวิกฤตความสะอาดเว็บ ☢️
-            </h1>
-            <p className="text-gray-550 text-base leading-relaxed font-normal">
-              กูเกิลปล่อยอัปเดตระบบตรวจจับประมวลผลค้นหาแกนกลาง (Core Updates) หลายครั้งต่อปี 
-              จุดประสงค์หลักคือการคัดกรองเนื้อหาปิ่นปั้นอัตโนมัติด้วย AI ในปริมาณมากแบบไร้ประโยชน์ และสแปมคีย์เวิร์ดซ้ำซ้อน 
-              หากคุณต้องการรอดพ้นอย่างถาวรและรักษาแต้มความยั่งยืนของทราฟฟิก เกณฑ์มาตรฐาน E-E-A-T คือเกราะกำบังหลัก!
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight whitespace-pre-line">
+            {content?.headline || "Google Core Updates: ปราสาทและทฤษฎีการผ่านวิกฤตความสะอาดเว็บ ☢️"}
+          </h1>
+            <p className="text-gray-550 text-base leading-relaxed font-normal whitespace-pre-line">
+            {content?.description || "กูเกิลปล่อยอัปเดตระบบตรวจจับประมวลผลค้นหาแกนกลาง (Core Updates) หลายครั้งต่อปี จุดประสงค์หลักคือการคัดกรองเนื้อหาปิ่นปั้นอัตโนมัติด้วย AI ในปริมาณมากแบบไร้ประโยชน์ และสแปมคีย์เวิร์ดซ้ำซ้อน หากคุณต้องการรอดพ้นอย่างถาวรและรักษาแต้มความยั่งยืนของทราฟฟิก เกณฑ์มาตรฐาน E-E-A-T คือเกราะกำบังหลัก!"}
+          </p>
           </div>
 
           {/* E-E-A-T Cards */}

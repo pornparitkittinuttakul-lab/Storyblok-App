@@ -5,6 +5,7 @@ import {
   Sparkles, Clipboard, ShieldCheck, HelpCircle, Eye, Image as ImageIcon, Award
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { storyblokEditable } from "@storyblok/react";
 
 interface GmbRecommendation {
   name: string;
@@ -14,7 +15,7 @@ interface GmbRecommendation {
   recommendation: string;
 }
 
-export default function GmbTools() {
+export default function GmbTools({ content }: { content?: any }) {
   const [mapsUrl, setMapsUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -119,7 +120,7 @@ export default function GmbTools() {
   };
 
   return (
-    <div className="bg-gray-50/50 min-h-screen text-gray-900 font-sans pb-24 selection:bg-emerald-105 selection:bg-emerald-100">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50/50 min-h-screen text-gray-900 font-sans pb-24 selection:bg-emerald-105 selection:bg-emerald-100">
       
       {/* Visual Sticky Header bar */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
@@ -145,13 +146,11 @@ export default function GmbTools() {
           <div className="inline-flex p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
             <MapPin className="w-6 h-6 animate-pulse" />
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-990 font-sans text-gray-900 leading-tight">
-            ประเมินคะแนนความแข็งแกร่งของหมุด Google Maps 📍
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-990 font-sans text-gray-900 leading-tight whitespace-pre-line">
+            {content?.headline || "ประเมินคะแนนความแข็งแกร่งของหมุด Google Maps 📍"}
           </h1>
-          <p className="text-gray-500 text-sm leading-relaxed">
-            เปลี่ยนเรื่องยากระดับพรีเมียมให้กระจ่างใสในชิ้นเดียว! 
-            ป้อน URL ลิงก์แผนที่กูเกิลของแบรนด์คุณ เพื่อสล็อตสับวิเคราะห์ความแกร่งให้แตะ 100% 
-            และกางคำแนะนำแก้ไขภาษาไทยอย่างง่ายได้ทันใจสำหรับระดับกระเป๋าเงิน
+          <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line">
+            {content?.description || "เปลี่ยนเรื่องยากระดับพรีเมียมให้กระจ่างใสในชิ้นเดียว! ป้อน URL ลิงก์แผนที่กูเกิลของแบรนด์คุณ เพื่อสล็อตสับวิเคราะห์ความแกร่งให้แตะ 100% และกางคำแนะนำแก้ไขภาษาไทยอย่างง่ายได้ทันใจสำหรับระดับกระเป๋าเงิน"}
           </p>
         </div>
 

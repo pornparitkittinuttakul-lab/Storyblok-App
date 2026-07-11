@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Lightbulb, Zap, HelpCircle, Shield, Gauge, Cpu, CheckCircle2, AlertTriangle, RefreshCw } from "lucide-react";
+import { storyblokEditable } from "@storyblok/react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface SpeedMetric {
@@ -11,7 +12,7 @@ interface SpeedMetric {
   recommendation: string;
 }
 
-export default function PageSpeedTest() {
+export default function PageSpeedTest({ content }: { content?: any }) {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -145,7 +146,7 @@ export default function PageSpeedTest() {
   };
 
   return (
-    <div className="bg-white min-h-screen text-gray-900 font-sans selection:bg-rose-100 selection:text-rose-950">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-white min-h-screen text-gray-900 font-sans selection:bg-rose-100 selection:text-rose-950">
       
       {/* Interactive sticky header */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
@@ -172,12 +173,11 @@ export default function PageSpeedTest() {
           <div className="inline-flex p-3 bg-red-50 text-red-500 rounded-2xl">
             <Gauge className="w-8 h-8" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight">
-            ระบบตรวจสอบความเร็วและประสิทธิภาพเว็บ ⚡
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight whitespace-pre-line">
+            {content?.headline || "ระบบตรวจสอบความเร็วและประสิทธิภาพเว็บ ⚡"}
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
-            เชื่อมต่อ API สากลของ <code className="bg-gray-150 px-1 py-0.5 rounded font-mono text-gray-850">pagespeed.dev</code> 
-            เพื่อเจาะลึกความเร็วการโหลดของเพจ มีตารางคำแนะนำภาษาไทยและปุ่มคำศัพท์ช่วยเหลือให้ผู้เริ่มหัดทำเข้าใจได้อย่างง่ายดาย!
+          <p className="text-gray-500 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+            {content?.description || "เชื่อมต่อ API สากลของ <code className=\"bg-gray-150 px-1 py-0.5 rounded font-mono text-gray-850\">pagespeed.dev</code> เพื่อเจาะลึกความเร็วการโหลดของเพจ มีตารางคำแนะนำภาษาไทยและปุ่มคำศัพท์ช่วยเหลือให้ผู้เริ่มหัดทำเข้าใจได้อย่างง่ายดาย!"}
           </p>
         </div>
 

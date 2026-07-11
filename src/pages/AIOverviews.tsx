@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Sparkles, AlertTriangle, Zap, MessageSquare, Target } from "lucide-react";
+import { storyblokEditable } from "@storyblok/react";
 import { motion } from "motion/react";
 
-export default function AIOverviews() {
+export default function AIOverviews({ content }: { content?: any }) {
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50 min-h-screen text-gray-900 font-sans">
       {/* Header Sticky */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
@@ -33,14 +34,12 @@ export default function AIOverviews() {
         >
           {/* Headline */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight">
-              Google AI Overviews (AIO): สรุปประเด็นด้วยเทคโนโลยี AI 🤖
-            </h1>
-            <p className="text-gray-500 text-base leading-relaxed">
-              ฟังก์ชั่น AI Overviews ของ Google บีบสรุปคำตอบสำเร็จรูปขึ้นไปวางหน้าแรกสุดของการเสิร์ช 
-              ทำให้หน้าเว็บต่างต้องการให้แบรนด์ของตนเองเข้าไปเป็นแหล่งอ้างอิงลิงก์ของบอทคำถามอัจฉริยะเหล่านี้ 
-              เพื่อรับทราฟฟิกตรงและแสดงอำนาจความนิยมเชิงข้อมูล
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight whitespace-pre-line">
+            {content?.headline || "Google AI Overviews (AIO): สรุปประเด็นด้วยเทคโนโลยี AI 🤖"}
+          </h1>
+            <p className="text-gray-500 text-base leading-relaxed whitespace-pre-line">
+            {content?.description || "ฟังก์ชั่น AI Overviews ของ Google บีบสรุปคำตอบสำเร็จรูปขึ้นไปวางหน้าแรกสุดของการเสิร์ช ทำให้หน้าเว็บต่างต้องการให้แบรนด์ของตนเองเข้าไปเป็นแหล่งอ้างอิงลิงก์ของบอทคำถามอัจฉริยะเหล่านี้ เพื่อรับทราฟฟิกตรงและแสดงอำนาจความนิยมเชิงข้อมูล"}
+          </p>
           </div>
 
           {/* AI Strategy Info Block */}

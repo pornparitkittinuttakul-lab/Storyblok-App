@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Wifi, BarChart2, BookOpen, Layers, Pocket } from "lucide-react";
+import { storyblokEditable } from "@storyblok/react";
 import { motion } from "motion/react";
 
-export default function GenerativeEngine() {
+export default function GenerativeEngine({ content }: { content?: any }) {
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50 min-h-screen text-gray-900 font-sans">
       {/* Sticky Top Header */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
@@ -33,14 +34,12 @@ export default function GenerativeEngine() {
         >
           {/* Header Description */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight">
-              Generative Engine Optimization (GEO) 📡
-            </h1>
-            <p className="text-gray-550 text-base leading-relaxed font-normal">
-              โมเดลการสร้างคะแนนระดับสากลยุคใหม่ สำหรับแพลตฟอร์มอย่าง ChatGPT (with Search), Gemini, Perplexity และ Claude 
-              เป้าหมายที่แท้จริงคือการเพิ่มความกว้างและสัดส่วนความหนาแน่นของการอ้างอิงแบรนด์ (Brand Citations) 
-              เพื่อให้ AI คัดเลือกสินค้าหรือผลงานบริการของธุรกิจเราไปส่งมอบให้แก่ลูกค้า
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight whitespace-pre-line">
+            {content?.headline || "Generative Engine Optimization (GEO) 📡"}
+          </h1>
+            <p className="text-gray-550 text-base leading-relaxed font-normal whitespace-pre-line">
+            {content?.description || "โมเดลการสร้างคะแนนระดับสากลยุคใหม่ สำหรับแพลตฟอร์มอย่าง ChatGPT (with Search), Gemini, Perplexity และ Claude เป้าหมายที่แท้จริงคือการเพิ่มความกว้างและสัดส่วนความหนาแน่นของการอ้างอิงแบรนด์ (Brand Citations) เพื่อให้ AI คัดเลือกสินค้าหรือผลงานบริการของธุรกิจเราไปส่งมอบให้แก่ลูกค้า"}
+          </p>
           </div>
 
           {/* Core GEO Pillars */}

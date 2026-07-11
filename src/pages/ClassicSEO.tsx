@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle, Flame, Server, Code, Search, BookOpen, AlertCircle } from "lucide-react";
+import { storyblokEditable } from "@storyblok/react";
 import { motion } from "motion/react";
 
-export default function ClassicSEO() {
+export default function ClassicSEO({ content }: { content?: any }) {
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
+    <div {...(content ? storyblokEditable(content) : {})} className="bg-gray-50 min-h-screen text-gray-900 font-sans">
       {/* Header Back Button & Topic Intro */}
       <div className="w-full bg-white border-b border-gray-100 py-6 sticky top-0 z-20 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
@@ -33,14 +34,12 @@ export default function ClassicSEO() {
         >
           {/* Hero Header */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight">
-              Classic Google SEO: หน้าแลนดิ้งเพจโครงสร้างพื้นฐาน 🔍
-            </h1>
-            <p className="text-gray-500 text-base leading-relaxed">
-              การทำ SEO ดั้งเดิม (Standard On-Page, Off-Page, และ Technical SEO) คือศิลาฤกษ์หลักที่ห้ามมองข้าม 
-              แม้ว่าระบบประมวลผลคำตอบจะมี AI เข้ามาส่งเสริม แต่บอท Google Search 
-              ยังคงต้องพึ่งพามาตรฐานสากลเหล่านี้เป็นด่านแรกเพื่อประเมินค่าคุณภาพของบทความ
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 tracking-tight whitespace-pre-line">
+            {content?.headline || "Classic Google SEO: หน้าแลนดิ้งเพจโครงสร้างพื้นฐาน 🔍"}
+          </h1>
+            <p className="text-gray-500 text-base leading-relaxed whitespace-pre-line">
+            {content?.description || "การทำ SEO ดั้งเดิม (Standard On-Page, Off-Page, และ Technical SEO) คือศิลาฤกษ์หลักที่ห้ามมองข้าม แม้ว่าระบบประมวลผลคำตอบจะมี AI เข้ามาส่งเสริม แต่บอท Google Search ยังคงต้องพึ่งพามาตรฐานสากลเหล่านี้เป็นด่านแรกเพื่อประเมินค่าคุณภาพของบทความ"}
+          </p>
           </div>
 
           {/* Interactive Core Pillars Grid */}
