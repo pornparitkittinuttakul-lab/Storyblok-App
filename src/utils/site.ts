@@ -26,12 +26,8 @@ export interface SitePageDefinition {
 const DEFAULT_SITE_URL = "https://seo-academy.example.com";
 const DEFAULT_OG_IMAGE = "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1200";
 
-function getMetaEnv(): Record<string, string | undefined> {
-  return ((import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env ?? {});
-}
-
 export function getSiteUrl() {
-  const siteUrl = getMetaEnv().VITE_SITE_URL?.trim() || DEFAULT_SITE_URL;
+  const siteUrl = (import.meta as any).env.VITE_SITE_URL?.trim() || DEFAULT_SITE_URL;
   return siteUrl.replace(/\/+$/g, "");
 }
 

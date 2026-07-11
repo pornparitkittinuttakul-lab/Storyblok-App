@@ -102,16 +102,11 @@ export interface StoryblokPageFetchResult {
   error?: string;
 }
 
-function getMetaEnv(): Record<string, string | undefined> {
-  return ((import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env ?? {});
-}
-
 function getStoryblokConfig() {
-  const env = getMetaEnv();
-  const token = env.VITE_STORYBLOK_TOKEN?.trim();
-  const region = (env.VITE_STORYBLOK_REGION?.trim().toLowerCase() || "eu") as StoryblokRegion;
-  const version = (env.VITE_STORYBLOK_VERSION?.trim().toLowerCase() === "published" ? "published" : "draft") as StoryblokVersion;
-  const cacheVersion = env.VITE_STORYBLOK_CACHE_VERSION?.trim();
+  const token = (import.meta as any).env.VITE_STORYBLOK_TOKEN?.trim();
+  const region = ((import.meta as any).env.VITE_STORYBLOK_REGION?.trim().toLowerCase() || "eu") as StoryblokRegion;
+  const version = ((import.meta as any).env.VITE_STORYBLOK_VERSION?.trim().toLowerCase() === "published" ? "published" : "draft") as StoryblokVersion;
+  const cacheVersion = (import.meta as any).env.VITE_STORYBLOK_CACHE_VERSION?.trim();
 
   let baseUrl = "https://api.storyblok.com/v2";
   if (region === "us") {
